@@ -1,37 +1,52 @@
-count = 0
-# to set the count as 0
 import random
-sticks = random.randint(1,20)
-print("How many sticks in the pile:", sticks)
-# to random the number of sticks
-print("There are",sticks, "in the pile")
-# showing the number of sticks in the pile
+# to import random function
+def x(sticks,pile):
+  return print("There are", sticks - pick ,"sticks left in the pile.")
+# to make function for showing the amount os sticks that still in the pile
 name = input("What is your name? ")
 # to ask for the player name
-def x(sticks, pick):
-  return print("There are ", sticks - pick, "sticks in the pile")
-# set function to print the amount of stick that left
-while sticks != 0:
-  pick = int(input(name + " how many sticks you will take (1 or 2) "))
-  #set the loop that if we still have sticks player need to take the stick out
-  if pick == 1:
-    x(sticks, pick)
+sticks = int(input("numbers of stick:" ))
+# to add the number of sticks
+print("There are",sticks, "in the pile")
+# showing the number of sticks in the pile
+turn = "I"
+# to set the turn for python
+while sticks > 0:
+  if turn == "I":
+    pick = random.randint(1, min(2, sticks))
+    print("I take" ,pick , ",there are", sticks - pick, "sticks in the pile")
     sticks = sticks - pick
-    count = count + 1
-  #pick stick out 1 the stick in the pile will decrease and show the stick that was left
-  elif pick == 2 and sticks > 1:
-    x(sticks, pick)
-    sticks = sticks - pick
-    count = count + 1
-  #pick stick out 2 and the stick in the pile have to be more than 1 the stick in the pile will decrease and show the stick that was left
-  elif pick == 2 and sticks < 2:
-    print("There are no enough sticks to take")
-  #If the stick in the pile is less than 2 and we want to pick to it will show that not enough sticks
-  elif pick > 2 :
-    print("No you can not take more than 2 sticks!")
-  #show "No you can not take more than 2 sticks!" when input more than 2
-  else :
-    print("No you can not take less than 1 stick!")
-  #show "No you can not take less than 1 stick!" when input less than 1
-print("OK. There is no stick left in the pile. You spent", count, "times")
-# after the sticks equal to 0, it will show the times that we use to play
+    #To make the program random 1 or 2 sticks
+    if sticks == 0:
+      print("I take the last stick, YOU WON")
+      #if sticks = 0 it will show "I take the last stick, YOU WON"
+    else:
+      turn = "You"
+      #if stick > 0, It change turn to player
+  else:
+    pick = int(input("How many sticks will you take? (1 or 2): "))
+    # to input the number of stick that we will take
+    if pick == 1 or (pick == 2 and sticks > 1):
+      x(sticks,pick)
+      sticks = sticks - pick
+    #if we take 1 or 2 stick and the stick in the pile is more than 2 it will show the amount of stick that left in the pile
+      if sticks == 0:
+        print("You take the last stick, I WON(Python WON)")
+        #if sticks = 0 it will show "You take the last stick, I WON(Python WON)
+      else:
+        turn = "I"
+        #if stick > 0, It change turn to player 
+    elif pick == 2 and sticks < 2:
+      print("There are no enough sticks to take")
+    # if player try to take 2 stick while the pile has stick less than 2 it will show "There are no enough sticks to take"
+    elif pick > 2 :
+      print("No you can not take more than 2 sticks!")
+    #if player try to take more than 2 sticks it will show "No you can not take more than 2 sticks!"
+    else :
+      print("No you can not take less than 1 stick!")
+    #if player try to take less than 1 stick it will show "No you can not take less than 1 stick!"
+    #It won't change the playe until player take the stick out correctly
+
+#1. It should take as much as it can to make this end fastest.
+#2. No, In some case player can win it
+#3. The strategy of the AI won't change. It still random the number.
