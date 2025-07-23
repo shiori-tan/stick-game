@@ -47,6 +47,6 @@ while sticks > 0:
     #if player try to take less than 1 stick it will show "No you can not take less than 1 stick!"
     #It won't change the playe until player take the stick out correctly
 
-#1. It should take as much as it can to make this end fastest.
-#2. No, In some case player can win it
-#3. The strategy of the AI won't change. It still random the number.
+#1. It should take the stick in order to make the player need to play on 4 sticks.
+#2. Yes, the AI should win every round.
+#3. The strategy of the AI will change but it still has the similar pattern as before.
