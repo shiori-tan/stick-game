@@ -1,5 +1,3 @@
-import random
-# to import random function
 def x(sticks,pile):
   return print("There are", sticks - pick ,"sticks left in the pile.")
 # to make function for showing the amount os sticks that still in the pile
@@ -9,44 +7,55 @@ sticks = int(input("numbers of stick:" ))
 # to add the number of sticks
 print("There are",sticks, "in the pile")
 # showing the number of sticks in the pile
+k = int(input("The maximum number of sticks that can be pick: "))
+# to make the rule for number of stick that can pick
+print("You can pick", k, "sticks per turn")
 turn = "I"
 # to set the turn for python
 while sticks > 0:
   if turn == "I":
-    pick = random.randint(1, min(2, sticks))
-    print("I take" ,pick , ",there are", sticks - pick, "sticks in the pile")
-    sticks = sticks - pick
-    #To make the program random 1 or 2 sticks
-    if sticks == 0:
-      print("I take the last stick, YOU WON")
-      #if sticks = 0 it will show "I take the last stick, YOU WON"
+    if sticks <= k:
+      pick = sticks
+    # to make a program pick k if k is greater or equal to sticks
     else:
-      turn = "You"
-      #if stick > 0, It change turn to player
+      pick = (sticks - 1) % (k + 1)
+      if pick == 0:
+          pick = 1
+      #to calculate if sticks - 1 has no fraction, program will take 1 stick to give the program an advantage over player
+    print("I take", pick , ",there are", sticks - pick, "sticks in the pile")
+    # to print the number of stick that program pick
+    sticks = sticks - pick
+    if sticks == 0:
+        print ("I take the last stick, YOU WON")
+        turn = None
+    # to set condition when program got the last stick, it will show that it lost and the turn won't change
+    else:
+        turn = "You"
+    #to change turn to player
   else:
-    pick = int(input("How many sticks will you take? (1 or 2): "))
-    # to input the number of stick that we will take
-    if pick == 1 or (pick == 2 and sticks > 1):
+    pick = int(input("How many sticks will you take? : "))
+    #to input the number of stick that player want to pick
+    if pick >= 1 and pick <= k and pick <= sticks:
+    #player need to pick more than 1 but less than k and the pick need to equal or less than stick in the pile
       x(sticks,pick)
       sticks = sticks - pick
-    #if we take 1 or 2 stick and the stick in the pile is more than 2 it will show the amount of stick that left in the pile
       if sticks == 0:
         print("You take the last stick, I WON(Python WON)")
         #if sticks = 0 it will show "You take the last stick, I WON(Python WON)
       else:
         turn = "I"
-        #if stick > 0, It change turn to player 
-    elif pick == 2 and sticks < 2:
+        #to change turn back to program
+    elif pick > sticks:
       print("There are no enough sticks to take")
-    # if player try to take 2 stick while the pile has stick less than 2 it will show "There are no enough sticks to take"
-    elif pick > 2 :
-      print("No you can not take more than 2 sticks!")
-    #if player try to take more than 2 sticks it will show "No you can not take more than 2 sticks!"
+      #condition when the sticks in the pile is less than the stick that player want to take.
+    elif pick > k :
+      print("No you can not take more than", k, "sticks!")
+      #condition to prevent player take more sticks than the maximum number of stick that can take
     else :
-      print("No you can not take less than 1 stick!")
-    #if player try to take less than 1 stick it will show "No you can not take less than 1 stick!"
-    #It won't change the playe until player take the stick out correctly
+      print("No you can not take less than 1 stick!") 
+      #condition for prevent player take less than 1 stick   
 
-#1. It should take the stick in order to make the player need to play on 4 sticks.
-#2. Yes, the AI should win every round.
-#3. The strategy of the AI will change but it still has the similar pattern as before.
+#1. AI need to think in Winning position and losing position using modulo calculate. In the formula we need to minus 1 to make AI not the one who get the last stick.
+# the losing postion is n ≡ 1 mod (k+1) or 1, k+2, 2k + 3 ... .If the AI in losing postion it will take 1 and make player in losing position.
+#2. Yes, the AI should win every rounds.
+#3. The strategy of the AI won't change.
