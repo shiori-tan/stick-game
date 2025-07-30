@@ -15,8 +15,10 @@ turn = "I"
 while sticks > 0:
   if turn == "I":
     if sticks <= k:
-      pick = sticks
-    # to make a program pick k if k is greater or equal to sticks
+      pick = sticks - 1
+      if pick < 1:
+        pick = 1
+    # to make a program pick k if k is greater or equal to sticks or pick < 1 AI will pick = 1
     else:
       pick = (sticks - 1) % (k + 1)
       if pick == 0:
@@ -57,5 +59,5 @@ while sticks > 0:
 
 #1. AI need to think in Winning position and losing position using modulo calculate. In the formula we need to minus 1 to make AI not the one who get the last stick.
 # the losing postion is n ≡ 1 mod (k+1) or 1, k+2, 2k + 3 ... .If the AI in losing postion it will take 1 and make player in losing position.
-#2. Yes, the AI should win every rounds.
+#2. No, sometimes AI can lose if player knows the strategy and play perfect game.
 #3. The strategy of the AI won't change.
